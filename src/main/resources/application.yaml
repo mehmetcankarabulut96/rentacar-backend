@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: RentACar
+  datasource:
+    url: jdbc:postgresql://localhost:5432/car-rental
+    username: your_username
+    password: your_password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      javax.persistence.validation.mode: none
+    open-in-view: false
+server:
+  port: 7777
