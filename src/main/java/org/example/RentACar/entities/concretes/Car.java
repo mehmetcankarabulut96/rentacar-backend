@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.RentACar.entities.enums.CarState;
 
 @Table(name="cars")
 @Entity
@@ -28,7 +29,8 @@ public class Car {
     private int modelYear;
 
     @Column(name = "state")
-    private int state;
+    @Enumerated(EnumType.STRING)
+    private CarState state;
 
     @ManyToOne
     @JoinColumn(name = "model_id")
