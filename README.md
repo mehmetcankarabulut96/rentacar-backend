@@ -19,7 +19,7 @@ Spring Boot REST API application developed using traditional N-Layer Architectur
 - Brand & Model CRUD operations completed
 
 ## Future Improvements
-- Car & Rental CRUD operations
+- Rental CRUD operations
 - Mapper Optimizations
 - Convert Page to PagedModel
 - Swagger / OpenAPI documentation
