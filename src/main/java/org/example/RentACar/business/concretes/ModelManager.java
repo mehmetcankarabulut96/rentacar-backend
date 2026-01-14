@@ -42,7 +42,7 @@ public class ModelManager implements ModelService {
 
         brandBusinessRules.checkIfBrandNotExistsById(brandId);
 
-        Brand brand = brandRepository.getReferenceById(brandId);
+        Brand brand = brandRepository.getReferenceById(brandId); // proxy object
 
         Model model = modelMapperService.mapToModelFromCreateModelRequest(createModelRequest);
         model.setBrand(brand);

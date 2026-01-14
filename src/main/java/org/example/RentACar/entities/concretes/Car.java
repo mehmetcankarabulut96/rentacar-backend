@@ -19,7 +19,7 @@ public class Car {
     @Column(name="id")
     private int id;
 
-    @Column(name = "plate")
+    @Column(name = "plate", unique = true)
     private String plate;
 
     @Column(name = "dailyPrice")
@@ -32,7 +32,7 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private CarState state;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "model_id")
     private Model model;
 }
