@@ -1,6 +1,6 @@
 # Rent A Car REST API
 
-Spring Boot REST API application developed using traditional N-Layer Architecture.
+Spring Boot REST API application developed using traditional N-Layered Architecture.
 
 ## Tech Stack
 - Java 17
@@ -9,7 +9,7 @@ Spring Boot REST API application developed using traditional N-Layer Architectur
 - PostgreSQL (Local)
 
 ## Architecture & Design
-- N-Layer Architecture
+- Monolith N-Layered Architecture
 - Request–Response pattern
 - Global exception handling
 - Custom mapper implementation
