@@ -49,5 +49,6 @@ public class CarMapperManager implements CarMapperService{
         car.setDailyPrice(createCarRequest.getDailyPrice());
         car.setModelYear(createCarRequest.getModelYear());
         car.setState(createCarRequest.getState());
+        car.setDeleted(createCarRequest.isDeleted());
     }
 }

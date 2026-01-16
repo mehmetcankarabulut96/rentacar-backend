@@ -14,5 +14,6 @@ public class UpdateCarRequest {
     private double dailyPrice;
     private int modelYear;
     private CarState state;
+    private boolean deleted;
     private String modelName;
 }

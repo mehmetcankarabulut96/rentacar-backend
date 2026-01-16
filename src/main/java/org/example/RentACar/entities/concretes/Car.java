@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.RentACar.entities.enums.CarState;
 
+import java.util.List;
+
 @Table(name="cars")
 @Entity
 @Getter
@@ -32,7 +34,13 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private CarState state;
 
+    @Column(name = "deleted", nullable = false)
+    private boolean deleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "model_id")
     private Model model;
+
+    @OneToMany(mappedBy = "car")
+    private List<Rental> rentals;
 }
