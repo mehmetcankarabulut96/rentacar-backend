@@ -22,7 +22,7 @@ Spring Boot REST API application developed using traditional N-Layer Architectur
 ## Future Improvements
 - Rental CRUD operations
 - Mapper Optimizations
-- Convert Page to PagedModel
+- Switch Page to PagedModel
 - Swagger / OpenAPI documentation
 - Docker support
 - Unit tests
