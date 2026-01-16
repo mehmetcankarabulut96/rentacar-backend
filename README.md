@@ -4,7 +4,7 @@ Spring Boot REST API application developed using traditional N-Layered Architect
 
 ## Tech Stack
 - Java 17
-- Spring Boot 3.5.9
+- Spring Boot 3
 - Spring Data JPA
 - PostgreSQL (Local)
 
