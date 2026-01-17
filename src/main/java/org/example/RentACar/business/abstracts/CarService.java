@@ -13,4 +13,5 @@ public interface CarService {
     void add(CreateCarRequest createCarRequest);
     void update(UpdateCarRequest updateCarRequest);
     void delete(int id);
+    boolean isCarExistsById(int id);
 }

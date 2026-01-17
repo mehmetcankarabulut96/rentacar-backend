@@ -20,8 +20,9 @@ Spring Boot REST API application developed using traditional N-Layered Architect
 - Designing Rental entity and its relations
 
 ## Future Improvements
-- Rental CRUD operations
-- Mapper Optimizations
+- Rental & Customer CRUD operations
+- Refactor services and business rules that call directly other repositories or business rules
+- Mapper optimizations
 - Switch Page to PagedModel
 - Swagger / OpenAPI documentation
 - Docker support

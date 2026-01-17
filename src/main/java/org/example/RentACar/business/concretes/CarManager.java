@@ -91,4 +91,9 @@ public class CarManager implements CarService {
 
         carRepository.save(car);
     }
+
+    @Override
+    public boolean isCarExistsById(int id) {
+        return carRepository.existsById(id);
+    }
 }
