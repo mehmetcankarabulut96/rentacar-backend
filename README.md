@@ -16,7 +16,7 @@ Spring Boot REST API application developed using traditional N-Layered Architect
 - DTO-based communication
 
 ## Current Status
-- Brand & Model & Car & Customer CRUD operations completed
+- Brand & Model & Car & Rental CRUD operations completed
 - Designing Customer entity and its relations
 
 ## Future Improvements
