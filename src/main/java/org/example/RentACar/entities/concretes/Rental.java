@@ -1,6 +1,7 @@
 package org.example.RentACar.entities.concretes;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.RentACar.entities.enums.RentalStatus;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "rentals")
-@Setter
+@Data
 @NoArgsConstructor
 public class Rental {
     @Id
@@ -25,6 +26,9 @@ public class Rental {
 
     @Column(name = "end_datetime")
     private LocalDateTime endDateTime;
+
+    @Column(name = "deleted")
+    private boolean deleted;
 
     @ManyToOne
     @JoinColumn(name="car_id", nullable = false)

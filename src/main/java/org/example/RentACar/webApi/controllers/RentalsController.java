@@ -3,10 +3,11 @@ package org.example.RentACar.webApi.controllers;
 import lombok.AllArgsConstructor;
 import org.example.RentACar.business.abstracts.RentalService;
 import org.example.RentACar.business.requests.Rental.CreateRentalRequest;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.example.RentACar.business.requests.Rental.UpdateRentalRequest;
+import org.example.RentACar.business.responses.Rental.GetAllActiveRentalResponse;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/rentals")
@@ -15,7 +16,22 @@ public class RentalsController {
     private RentalService rentalService;
 
     @PostMapping
-    void add(@RequestBody CreateRentalRequest request){
-        rentalService.add(request);
+    public void add(@RequestBody CreateRentalRequest request){
+        this.rentalService.add(request);
+    }
+
+    @GetMapping
+    public List<GetAllActiveRentalResponse> getAllActive(){
+        return this.rentalService.getAllActive();
+    }
+
+    @PutMapping
+    public void update(@RequestBody UpdateRentalRequest request){
+        this.rentalService.update(request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable int id){
+        this.rentalService.delete(id);
     }
 }
