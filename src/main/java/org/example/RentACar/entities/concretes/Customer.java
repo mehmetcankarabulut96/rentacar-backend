@@ -2,14 +2,14 @@ package org.example.RentACar.entities.concretes;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "customers")
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
@@ -25,6 +25,9 @@ public class Customer {
 
     @Column(name = "email", unique = true)
     private String email;
+
+    @Column(name = "deleted")
+    private boolean deleted;
 
     @OneToMany(mappedBy = "customer")
     private List<Rental> rentals;

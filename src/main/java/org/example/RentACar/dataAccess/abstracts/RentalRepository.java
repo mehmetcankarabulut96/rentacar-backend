@@ -10,4 +10,5 @@ public interface RentalRepository extends JpaRepository<Rental, Integer> {
     boolean existsByCarIdAndStatus(int carId, RentalStatus status);
     List<Rental> findAllByStatus(RentalStatus status);
     boolean existsByIdAndStatus(int id, RentalStatus status);
+    boolean existsByCustomerIdAndStatus(int customerId, RentalStatus status);
 }

@@ -14,15 +14,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class RentalBusinessRules {
     CarService carService;
-    CustomerService customerService;
     RentalRepository rentalRepository;
 
     public void checkIfRentalCreateable(int carId, int customerId){
         if(!carService.isCarExistsById(carId)){
             throw new BusinessException("Car not found with id: " + carId);
-        }
-        if(!customerService.isCustomerExistsById(customerId)){
-            throw new BusinessException("Customer not found with id: " + customerId);
         }
     }
 

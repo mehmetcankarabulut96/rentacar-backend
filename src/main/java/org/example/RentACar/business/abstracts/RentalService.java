@@ -12,4 +12,5 @@ public interface RentalService {
     List<GetAllActiveRentalResponse> getAllActive();
     void update(UpdateRentalRequest request);
     void delete(int id);
+    boolean existsByCustomerIdAndStatus(int customerId, RentalStatus status);
 }

@@ -80,4 +80,9 @@ public class RentalManager implements RentalService {
 
         rentalRepository.save(rental);
     }
+
+    @Override
+    public boolean existsByCustomerIdAndStatus(int customerId, RentalStatus status) {
+        return rentalRepository.existsByCustomerIdAndStatus(customerId, status);
+    }
 }
