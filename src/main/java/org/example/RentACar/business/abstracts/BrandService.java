@@ -8,9 +8,11 @@ import org.example.RentACar.business.responses.Brand.GetByIdBrandResponse;
 import java.util.List;
 
 public interface BrandService {
+    void add(CreateBrandRequest createBrandRequest);
     List<GetAllBrandsResponse> getAll();
     GetByIdBrandResponse getById(int id);
-    void add(CreateBrandRequest createBrandRequest);
     void update(UpdateBrandRequest updateBrandRequest);
     void delete(int id);
+
+    void checkIfBrandExists(int id);
 }
