@@ -21,6 +21,7 @@ Spring Boot REST API application developed using traditional N-Layered Architect
 
 ## Future Improvements
 - Refactor services and business rules that call directly other repositories or business rules
+- Refactor request/response dto's
 - Mapper optimizations
 - Switch Page to PagedModel
 - Swagger / OpenAPI documentation
