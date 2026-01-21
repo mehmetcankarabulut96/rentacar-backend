@@ -6,4 +6,5 @@ import lombok.Getter;
 public class UpdateModelRequest {
     private int id;
     private String name;
+    private int brandId;
 }
