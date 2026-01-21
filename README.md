@@ -18,6 +18,7 @@ Spring Boot REST API application developed using traditional N-Layered Architect
 ## Current Status
 - All CRUD operations completed
 - Refactoring services & business rules
+- Refactoring dto's
 
 ## Future Improvements
 - Refactor services and business rules that call directly other repositories or business rules

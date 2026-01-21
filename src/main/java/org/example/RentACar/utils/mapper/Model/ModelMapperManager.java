@@ -4,6 +4,7 @@ import org.example.RentACar.business.requests.Model.CreateModelRequest;
 import org.example.RentACar.business.requests.Model.UpdateModelRequest;
 import org.example.RentACar.business.responses.Model.GetAllModelsResponse;
 import org.example.RentACar.business.responses.Model.GetByIdModelResponse;
+import org.example.RentACar.entities.concretes.Brand;
 import org.example.RentACar.entities.concretes.Model;
 
 public class ModelMapperManager implements ModelMapperService{
@@ -19,9 +20,12 @@ public class ModelMapperManager implements ModelMapperService{
 
     @Override
     public Model mapToModelFromCreateModelRequest(CreateModelRequest createModelRequest) {
-
         Model model = new Model();
         model.setName(createModelRequest.getName());
+
+        Brand brand = new Brand();
+        brand.setId(createModelRequest.getBrandId());
+        model.setBrand(brand);
 
         return model;
     }
@@ -39,5 +43,9 @@ public class ModelMapperManager implements ModelMapperService{
     @Override
     public void mapToExistingModel(UpdateModelRequest updateModelRequest, Model model) {
         model.setName(updateModelRequest.getName());
+
+        Brand brand = new Brand();
+        brand.setId(updateModelRequest.getBrandId());
+        model.setBrand(brand);
     }
 }
