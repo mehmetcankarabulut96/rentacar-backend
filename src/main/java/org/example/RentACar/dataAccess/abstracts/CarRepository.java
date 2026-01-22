@@ -13,4 +13,6 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
     boolean existsByPlateAndIdNot(String plate, int id);
     Page<Car> findAllByDeletedFalse(Pageable pageable);
     Optional<Car> findByIdAndDeletedFalse(int id);
+
+    boolean existsByModelId(int modelId);
 }

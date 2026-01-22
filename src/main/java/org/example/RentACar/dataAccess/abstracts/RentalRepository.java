@@ -7,8 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RentalRepository extends JpaRepository<Rental, Integer> {
-    boolean existsByCarIdAndStatus(int carId, RentalStatus status);
     List<Rental> findAllByStatus(RentalStatus status);
     boolean existsByIdAndStatus(int id, RentalStatus status);
     boolean existsByCustomerIdAndStatus(int customerId, RentalStatus status);
+
+    boolean existsByCarIdAndStatus(int carId, RentalStatus status);
 }
