@@ -78,6 +78,13 @@ public class ModelManager implements ModelService {
     public void delete(int id) {
         modelBusinessRules.checkIfModelExistsById(id);
 
+        modelBusinessRules.checkIfModelCanBeDeleted(id);
+
         modelRepository.deleteById(id);
+    }
+
+    @Override
+    public void checkIfModelExists(int id) {
+        modelBusinessRules.checkIfModelExistsById(id);
     }
 }

@@ -14,4 +14,6 @@ public interface ModelService {
     GetByIdModelResponse getById(int id);
     void update(UpdateModelRequest updateModelRequest);
     void delete(int id);
+
+    void checkIfModelExists(int id);
 }
