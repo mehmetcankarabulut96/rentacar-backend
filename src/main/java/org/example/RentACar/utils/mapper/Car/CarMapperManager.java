@@ -5,6 +5,7 @@ import org.example.RentACar.business.requests.Car.UpdateCarRequest;
 import org.example.RentACar.business.responses.Car.GetAllCarsResponse;
 import org.example.RentACar.business.responses.Car.GetByIdCarResponse;
 import org.example.RentACar.entities.concretes.Car;
+import org.example.RentACar.entities.concretes.Model;
 
 public class CarMapperManager implements CarMapperService{
     @Override
@@ -40,6 +41,10 @@ public class CarMapperManager implements CarMapperService{
         car.setDailyPrice(createCarRequest.getDailyPrice());
         car.setModelYear(createCarRequest.getModelYear());
 
+        Model model = new Model();
+        model.setId(createCarRequest.getModelId());
+        car.setModel(model);
+
         return car;
     }
 
@@ -48,7 +53,5 @@ public class CarMapperManager implements CarMapperService{
         car.setPlate(createCarRequest.getPlate());
         car.setDailyPrice(createCarRequest.getDailyPrice());
         car.setModelYear(createCarRequest.getModelYear());
-        car.setState(createCarRequest.getState());
-        car.setDeleted(createCarRequest.isDeleted());
     }
 }
