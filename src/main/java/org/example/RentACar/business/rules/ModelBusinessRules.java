@@ -1,6 +1,7 @@
 package org.example.RentACar.business.rules;
 
 import org.example.RentACar.business.abstracts.BrandService;
+import org.example.RentACar.dataAccess.abstracts.CarRepository;
 import org.example.RentACar.dataAccess.abstracts.ModelRepository;
 import org.example.RentACar.utils.exception.BusinessException;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ public class ModelBusinessRules {
     private ModelRepository modelRepository;
 
     private BrandService brandService;
+    private CarRepository carRepository; // call repository instead of service to prevent circular dependency between Model <-> Car
 
     public void checkIfModelExistsById(int id){
         if(!modelRepository.existsById(id)){
@@ -43,5 +45,11 @@ public class ModelBusinessRules {
         }
 
         brandService.checkIfBrandExists(newBrandId);
+    }
+
+    public void checkIfModelCanBeDeleted(int id){
+        if(carRepository.existsByModelId(id)){
+            throw new BusinessException("Model can not be deleted because it has car(s)");
+        }
     }
 }

@@ -17,7 +17,7 @@ public class RentalBusinessRules {
     RentalRepository rentalRepository;
 
     public void checkIfRentalCreateable(int carId, int customerId){
-        if(!carService.isCarExistsById(carId)){
+        if(!carService.existsById(carId)){
             throw new BusinessException("Car not found with id: " + carId);
         }
     }
