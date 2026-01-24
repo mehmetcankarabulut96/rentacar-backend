@@ -3,6 +3,7 @@ package org.example.RentACar.business.rules;
 import lombok.AllArgsConstructor;
 import org.example.RentACar.business.abstracts.RentalService;
 import org.example.RentACar.dataAccess.abstracts.CustomerRepository;
+import org.example.RentACar.dataAccess.abstracts.RentalRepository;
 import org.example.RentACar.entities.enums.RentalStatus;
 import org.example.RentACar.utils.exception.BusinessException;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,14 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CustomerBusinessRules {
     private CustomerRepository customerRepository;
-    private RentalService rentalService;
+    private RentalRepository rentalRepository;
+
+
+    public void checkIfCustomerExists(int id){
+        if(!customerRepository.existsById(id)){
+            throw new BusinessException("Customer not found with id: " + id);
+        }
+    }
 
     public void checkIfCustomerExists(String email){
         if(customerRepository.existsByEmail(email)){
@@ -20,8 +28,8 @@ public class CustomerBusinessRules {
     }
 
     public void checkIfCustomerHasActiveRental(int customerId){
-        if(rentalService.existsByCustomerIdAndStatus(customerId, RentalStatus.ACTIVE)){
-            throw new BusinessException("Customer can not deleted because it has active rental");
+        if(rentalRepository.existsByCustomerIdAndStatus(customerId, RentalStatus.ACTIVE)){
+            throw new BusinessException("Customer has active rental");
         }
     }
 }

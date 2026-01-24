@@ -82,4 +82,11 @@ public class CarManager implements CarService {
     public boolean existsById(int id) {
         return carRepository.existsById(id);
     }
+
+    @Override
+    public void checkIfCarCanBeRented(int id) {
+        carBusinessRules.checkIfCarExists(id);
+
+        carBusinessRules.checkIfCarStateOkForRented(id);
+    }
 }

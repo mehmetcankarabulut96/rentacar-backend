@@ -14,4 +14,6 @@ public interface CustomerService {
     GetByIdCustomerResponse getById(int id);
     void update(UpdateCustomerRequest request);
     void delete(int id);
+
+    void checkIfCustomerCanRent(int customerId);
 }

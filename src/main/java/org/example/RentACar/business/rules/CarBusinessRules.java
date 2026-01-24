@@ -7,6 +7,7 @@ import org.example.RentACar.business.requests.Car.UpdateCarRequest;
 import org.example.RentACar.dataAccess.abstracts.CarRepository;
 import org.example.RentACar.dataAccess.abstracts.RentalRepository;
 import org.example.RentACar.entities.concretes.Car;
+import org.example.RentACar.entities.enums.CarState;
 import org.example.RentACar.entities.enums.RentalStatus;
 import org.example.RentACar.utils.exception.BusinessException;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,18 @@ public class CarBusinessRules {
     private CarRepository carRepository;
     private RentalRepository rentalRepository;
     private ModelService modelService;
+
+    public void checkIfCarStateOkForRented(int id){
+        if(!carRepository.existsByIdAndState(id, CarState.AVAILABLE)){
+            throw new BusinessException("Car is not available for rent");
+        }
+    }
+
+    public void checkIfCarExists(int id){
+        if(!carRepository.existsById(id)){
+            throw new BusinessException("Car not found with id: " + id);
+        }
+    }
 
     public void checkIfCarExists(String plate){
         if(carRepository.existsByPlate(plate)){

@@ -76,6 +76,13 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
+    public void checkIfCustomerCanRent(int customerId) {
+        customerBusinessRules.checkIfCustomerExists(customerId);
+
+        customerBusinessRules.checkIfCustomerHasActiveRental(customerId);
+    }
+
+    @Override
     public boolean isCustomerExistsById(int id) {
         return customerRepository.existsById(id);
     }

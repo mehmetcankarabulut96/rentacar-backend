@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.example.RentACar.business.abstracts.RentalService;
 import org.example.RentACar.business.requests.Rental.CreateRentalRequest;
 import org.example.RentACar.business.requests.Rental.UpdateRentalRequest;
-import org.example.RentACar.business.responses.Rental.GetAllActiveRentalResponse;
+import org.example.RentACar.business.responses.Rental.GetAllRentalResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +21,8 @@ public class RentalsController {
     }
 
     @GetMapping
-    public List<GetAllActiveRentalResponse> getAllActive(){
-        return this.rentalService.getAllActive();
+    public List<GetAllRentalResponse> getAll(){
+        return this.rentalService.getAll();
     }
 
     @PutMapping

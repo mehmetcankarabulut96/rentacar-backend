@@ -1,6 +1,7 @@
 package org.example.RentACar.dataAccess.abstracts;
 
 import org.example.RentACar.entities.concretes.Car;
+import org.example.RentACar.entities.enums.CarState;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +16,5 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
     Optional<Car> findByIdAndDeletedFalse(int id);
 
     boolean existsByModelId(int modelId);
+    boolean existsByIdAndState(int id, CarState carState);
 }

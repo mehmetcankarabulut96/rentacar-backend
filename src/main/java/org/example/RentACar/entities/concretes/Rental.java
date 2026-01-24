@@ -3,7 +3,6 @@ package org.example.RentACar.entities.concretes;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.example.RentACar.entities.enums.RentalStatus;
 
 import java.time.LocalDateTime;
