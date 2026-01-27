@@ -23,7 +23,7 @@ public class CustomerController {
 
     @GetMapping
     public List<GetAllCustomerResponse> getAll(){
-        return this.customerService.getAllByDeletedFalse();
+        return this.customerService.getAll();
     }
 
     @GetMapping("/{id}")

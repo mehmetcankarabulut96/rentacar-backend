@@ -11,4 +11,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     boolean existsByEmail(String email);
     List<Customer> findAllByDeletedFalse();
     Optional<Customer> findByIdAndDeletedFalse(int id);
+
+    boolean existsByEmailAndIdNot(String email, int customerId);
 }

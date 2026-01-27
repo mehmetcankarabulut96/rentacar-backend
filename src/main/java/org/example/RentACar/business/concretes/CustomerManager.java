@@ -25,7 +25,7 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public void add(CreateCustomerRequest request) {
-        customerBusinessRules.checkIfCustomerExists(request.getEmail());
+        customerBusinessRules.checkIfCustomerCanBeCreated(request);
 
         Customer customer = customerMapperService.from(request);
         customer.setDeleted(false);
@@ -34,7 +34,7 @@ public class CustomerManager implements CustomerService {
     }
 
     @Override
-    public List<GetAllCustomerResponse> getAllByDeletedFalse() {
+    public List<GetAllCustomerResponse> getAll() {
         return customerRepository.findAllByDeletedFalse()
                 .stream()
                 .map(customerMapperService::toGetAllCustomerResponse)
@@ -58,6 +58,8 @@ public class CustomerManager implements CustomerService {
         Customer customer = customerRepository.findByIdAndDeletedFalse(request.getId())
                 .orElseThrow(() -> new BusinessException("Customer not found with id: " + request.getId()));
 
+        customerBusinessRules.checkIfCustomerCanBeUpdated(request, customer);
+
         customerMapperService.mapToCustomer(request, customer);
 
         customerRepository.save(customer);
@@ -68,7 +70,7 @@ public class CustomerManager implements CustomerService {
         Customer customer = customerRepository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new BusinessException("Customer not found with id: " + id));
 
-        customerBusinessRules.checkIfCustomerHasActiveRental(id);
+        customerBusinessRules.checkIfCustomerCanBeDeleted(id);
 
         customer.setDeleted(true);
 

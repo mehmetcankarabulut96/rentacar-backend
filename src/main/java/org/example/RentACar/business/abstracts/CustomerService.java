@@ -8,12 +8,12 @@ import org.example.RentACar.business.responses.Customer.GetByIdCustomerResponse;
 import java.util.List;
 
 public interface CustomerService {
-    boolean isCustomerExistsById(int id);
     void add(CreateCustomerRequest request);
-    List<GetAllCustomerResponse> getAllByDeletedFalse();
+    List<GetAllCustomerResponse> getAll();
     GetByIdCustomerResponse getById(int id);
     void update(UpdateCustomerRequest request);
     void delete(int id);
 
     void checkIfCustomerCanRent(int customerId);
+    boolean isCustomerExistsById(int id);
 }
