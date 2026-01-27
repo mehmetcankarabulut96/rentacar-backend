@@ -1,6 +1,6 @@
 # Rent A Car REST API
 
-Spring Boot REST API project developed using traditional N-Layered Architecture.
+Car rental backend system using Spring Boot with traditional N-Layered Architecture.
 
 ## Tech Stack
 - Java 17
