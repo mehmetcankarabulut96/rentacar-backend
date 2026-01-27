@@ -1,5 +1,6 @@
 package org.example.RentACar.webApi.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.RentACar.business.abstracts.CustomerService;
 import org.example.RentACar.business.requests.Customer.CreateCustomerRequest;
@@ -17,7 +18,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping
-    public void add(@RequestBody CreateCustomerRequest request){
+    public void add(@RequestBody @Valid CreateCustomerRequest request){
         customerService.add(request);
     }
 
@@ -32,7 +33,7 @@ public class CustomerController {
     }
 
     @PutMapping
-    public void update(@RequestBody UpdateCustomerRequest request){
+    public void update(@RequestBody @Valid UpdateCustomerRequest request){
         this.customerService.update(request);
     }
 
