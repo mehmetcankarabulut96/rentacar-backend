@@ -1,6 +1,10 @@
 package org.example.RentACar.business.requests.Car;
 
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +13,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateCarRequest {
+
+    @NotBlank
+    @Size(min = 7, max = 10)
     private String plate;
-    private double dailyPrice;
-    private int modelYear;
-    private int modelId;
+
+    @NotNull
+    @Min(0)
+    private Double dailyPrice;
+
+    @NotNull
+    private Integer modelYear;
+
+    @NotNull
+    @Min(1)
+    private Integer modelId;
 }

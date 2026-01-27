@@ -1,5 +1,6 @@
 package org.example.RentACar.webApi.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.RentACar.business.abstracts.CarService;
 import org.example.RentACar.business.requests.Car.CreateCarRequest;
@@ -30,12 +31,12 @@ public class CarController {
     }
 
     @PostMapping
-    public void add(@RequestBody CreateCarRequest request){
+    public void add(@RequestBody @Valid CreateCarRequest request){
         this.carService.add(request);
     }
 
     @PutMapping
-    public void update(@RequestBody UpdateCarRequest request){
+    public void update(@RequestBody @Valid UpdateCarRequest request){
         this.carService.update(request);
     }
 
