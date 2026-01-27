@@ -1,5 +1,6 @@
 package org.example.RentACar.business.requests.Model;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,11 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateModelRequest {
-    @NotNull
+
     @NotBlank
     @Size(min = 3, max = 20)
     private String name;
 
     @NotNull
-    private int brandId;
+    @Min(1)
+    private Integer brandId;
 }
