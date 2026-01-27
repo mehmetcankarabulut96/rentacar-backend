@@ -14,6 +14,7 @@ import org.example.RentACar.utils.exception.BusinessException;
 import org.example.RentACar.utils.mapper.Brand.BrandMapperService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class BrandManager implements BrandService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public GetByIdBrandResponse getById(int id) {
         // ( spring.jpa.open-in-view: false ) && ( not @Transactional ) => LazyInitializationException
         // Brand brand = brandRepository.getReferenceById(id);

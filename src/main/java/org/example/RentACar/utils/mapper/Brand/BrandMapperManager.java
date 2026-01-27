@@ -4,6 +4,7 @@ import org.example.RentACar.business.requests.Brand.CreateBrandRequest;
 import org.example.RentACar.business.requests.Brand.UpdateBrandRequest;
 import org.example.RentACar.business.responses.Brand.GetAllBrandsResponse;
 import org.example.RentACar.business.responses.Brand.GetByIdBrandResponse;
+import org.example.RentACar.business.responses.Model.GetModelsByBrandResponse;
 import org.example.RentACar.entities.concretes.Brand;
 
 public class BrandMapperManager implements BrandMapperService{
@@ -34,7 +35,9 @@ public class BrandMapperManager implements BrandMapperService{
         GetByIdBrandResponse response = new GetByIdBrandResponse();
         response.setId(brand.getId());
         response.setName(brand.getName());
-
+        response.setModels(brand.getModels().stream().map(
+                model -> new GetModelsByBrandResponse(model.getId(), model.getName())
+        ).toList());
         return response;
     }
 }

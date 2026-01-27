@@ -1,13 +1,13 @@
-package org.example.RentACar.business.responses.Brand;
+package org.example.RentACar.business.responses.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class GetAllBrandsResponse {
+@NoArgsConstructor
+public class GetModelsByBrandResponse {
     private int id;
     private String name;
 }
