@@ -3,19 +3,15 @@ package org.example.RentACar.business.responses.Car;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.RentACar.business.responses.Rental.GetActiveRentalByCarResponse;
-
-import java.util.Optional;
+import org.example.RentACar.entities.enums.CarState;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetByIdCarResponse {
+public class GetCarsByModelResponse {
     private int id;
     private String plate;
     private double dailyPrice;
     private int modelYear;
-    private String state;
-    private String modelName;
-    private GetActiveRentalByCarResponse activeRental;
+    private CarState state;
 }
