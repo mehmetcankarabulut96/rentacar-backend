@@ -17,10 +17,9 @@ Car rental backend system using Spring Boot with traditional N-Layered Architect
 
 ## Current Status
 - All CRUD operations completed
-- Refactoring response dto's
+- Refactoring mapper code
 
 ## Future Improvements
-- Refactor response dto's (add child objects to dto)
 - Mapper optimizations
 - Switch Page to PagedModel
 - Unit tests
