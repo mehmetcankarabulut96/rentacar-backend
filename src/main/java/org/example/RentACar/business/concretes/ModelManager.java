@@ -13,6 +13,7 @@ import org.example.RentACar.utils.exception.Model.ModelNotFoundException;
 import org.example.RentACar.utils.mapper.Model.ModelMapperService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -51,6 +52,7 @@ public class ModelManager implements ModelService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public GetByIdModelResponse getById(int id) {
         Model model = modelRepository.findById(id)
                 .orElseThrow(() -> new ModelNotFoundException(id));

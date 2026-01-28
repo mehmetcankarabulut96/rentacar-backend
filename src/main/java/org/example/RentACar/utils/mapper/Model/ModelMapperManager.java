@@ -2,6 +2,7 @@ package org.example.RentACar.utils.mapper.Model;
 
 import org.example.RentACar.business.requests.Model.CreateModelRequest;
 import org.example.RentACar.business.requests.Model.UpdateModelRequest;
+import org.example.RentACar.business.responses.Car.GetCarsByModelResponse;
 import org.example.RentACar.business.responses.Model.GetAllModelsResponse;
 import org.example.RentACar.business.responses.Model.GetByIdModelResponse;
 import org.example.RentACar.entities.concretes.Brand;
@@ -36,6 +37,7 @@ public class ModelMapperManager implements ModelMapperService{
         response.setId(model.getId());
         response.setName(model.getName());
         response.setBrandName(model.getBrand().getName());
+        response.setCars(model.getCars().stream().map(car -> new GetCarsByModelResponse(car.getId(), car.getPlate(), car.getDailyPrice(), car.getModelYear(), car.getState())).toList());
 
         return response;
     }
