@@ -6,9 +6,12 @@ import org.example.RentACar.business.responses.Brand.GetAllBrandsResponse;
 import org.example.RentACar.business.responses.Brand.GetByIdBrandResponse;
 import org.example.RentACar.entities.concretes.Brand;
 
+import java.util.List;
+
 public interface BrandMapperService {
-    Brand mapToBrandFromCreateBrandRequest(CreateBrandRequest createBrandRequest);
-    void mapToBrand(UpdateBrandRequest updateBrandRequest, Brand brand);
-    GetAllBrandsResponse mapToGetAllBrandsResponseFromBrand(Brand brand);
-    GetByIdBrandResponse mapToGetByIdBrandResponseFromBrand(Brand brand);
+    Brand toBrand(CreateBrandRequest createBrandRequest);
+    void updateBrand(UpdateBrandRequest updateBrandRequest, Brand brand);
+    GetAllBrandsResponse toGetAllResponse(Brand brand);
+    List<GetAllBrandsResponse> toGetAllResponseList(List<Brand> brands);
+    GetByIdBrandResponse toGetByIdResponse(Brand brand);
 }

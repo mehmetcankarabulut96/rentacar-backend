@@ -31,7 +31,7 @@ public class BrandManager implements BrandService {
 
         brandBusinessRules.checkIfBrandExistsByName(name);
 
-        Brand brand = brandMapperService.mapToBrandFromCreateBrandRequest(createBrandRequest);
+        Brand brand = brandMapperService.toBrand(createBrandRequest);
 
         brandRepository.save(brand);
     }
@@ -40,10 +40,7 @@ public class BrandManager implements BrandService {
     public List<GetAllBrandsResponse> getAll() {
         List<Brand> brands = brandRepository.findAll();
 
-        return brands
-                .stream()
-                .map(brandMapperService::mapToGetAllBrandsResponseFromBrand)
-                .toList();
+        return brandMapperService.toGetAllResponseList(brands);
     }
 
     @Override
@@ -55,7 +52,7 @@ public class BrandManager implements BrandService {
         Brand brand = brandRepository.findById(id)
                 .orElseThrow(() -> new BrandNotFoundException(id));
 
-        return brandMapperService.mapToGetByIdBrandResponseFromBrand(brand);
+        return brandMapperService.toGetByIdResponse(brand);
     }
 
     @Override
@@ -65,7 +62,7 @@ public class BrandManager implements BrandService {
         Brand brand = brandRepository.findById(id)
                         .orElseThrow(() -> new BrandNotFoundException(id));
 
-        brandMapperService.mapToBrand(updateBrandRequest, brand);
+        brandMapperService.updateBrand(updateBrandRequest, brand);
 
         brandRepository.save(brand);
     }
