@@ -15,11 +15,6 @@ public class RentACarApplication {
 		return new CarMapperManager();
 	}
 
-	@Bean
-	public ModelMapperManager getModelMapperManager(){
-		return new ModelMapperManager();
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(RentACarApplication.class, args);
 	}

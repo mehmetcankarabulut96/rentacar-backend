@@ -36,7 +36,7 @@ public class ModelManager implements ModelService {
 
         modelBusinessRules.checkIfModelLimitExceededForBrand(brandId);
 
-        Model model = modelMapperService.mapToModelFromCreateModelRequest(createModelRequest);
+        Model model = modelMapperService.toModel(createModelRequest);
 
         modelRepository.save(model);
     }
@@ -45,10 +45,7 @@ public class ModelManager implements ModelService {
     public List<GetAllModelsResponse> getAll() {
         List<Model> models = this.modelRepository.findAll();
 
-        return models
-                .stream()
-                .map(modelMapperService::mapToGetAllModelsResponseFromModel)
-                .toList();
+        return modelMapperService.mapToGetAllResponseList(models);
     }
 
     @Override
@@ -57,7 +54,7 @@ public class ModelManager implements ModelService {
         Model model = modelRepository.findById(id)
                 .orElseThrow(() -> new ModelNotFoundException(id));
 
-        return modelMapperService.mapToGetByIdModelResponse(model);
+        return modelMapperService.toGetByIdResponse(model);
     }
 
     @Override
@@ -71,7 +68,7 @@ public class ModelManager implements ModelService {
 
         modelBusinessRules.checkIfBrandCanBeChanged(updateModelRequest.getBrandId(), model.getBrand().getId());
 
-        modelMapperService.mapToExistingModel(updateModelRequest, model);
+        modelMapperService.updateModel(updateModelRequest, model);
 
         modelRepository.save(model);
     }
