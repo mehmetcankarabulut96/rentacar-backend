@@ -20,11 +20,6 @@ public class RentACarApplication {
 		return new ModelMapperManager();
 	}
 
-	@Bean
-	public BrandMapperManager getBrandMapperManager(){
-		return new BrandMapperManager();
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(RentACarApplication.class, args);
 	}
