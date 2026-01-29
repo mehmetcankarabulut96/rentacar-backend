@@ -8,8 +8,11 @@ import org.example.RentACar.business.responses.Car.GetAllCarsResponse;
 import org.example.RentACar.business.responses.Car.GetByIdCarResponse;
 import org.example.RentACar.business.rules.CarBusinessRules;
 import org.example.RentACar.dataAccess.abstracts.CarRepository;
+import org.example.RentACar.dataAccess.abstracts.RentalRepository;
 import org.example.RentACar.entities.concretes.Car;
+import org.example.RentACar.entities.concretes.Rental;
 import org.example.RentACar.entities.enums.CarState;
+import org.example.RentACar.entities.enums.RentalStatus;
 import org.example.RentACar.utils.exception.BusinessException;
 import org.example.RentACar.utils.mapper.Car.CarMapperService;
 import org.springframework.data.domain.Page;
@@ -24,13 +27,15 @@ public class CarManager implements CarService {
     CarMapperService carMapperService;
     CarBusinessRules carBusinessRules;
 
+    RentalRepository rentalRepository;
+
     @Override
     public void add(CreateCarRequest createCarRequest) {
         // validation
         carBusinessRules.checkIfCarCanBeCreated(createCarRequest);
 
         // mapping
-        Car car = carMapperService.mapToCar(createCarRequest);
+        Car car = carMapperService.toCar(createCarRequest);
         car.setState(CarState.AVAILABLE);
         car.setDeleted(false);
 
@@ -42,7 +47,7 @@ public class CarManager implements CarService {
     @Transactional(readOnly = true)
     public Page<GetAllCarsResponse> getAll(Pageable pageable) {
         return carRepository.findAllByDeletedFalse(pageable)
-                .map(carMapperService::mapToGetAllCarResponse);
+                .map(carMapperService::toGetAllCarsResponse);
     }
 
     @Override
@@ -51,7 +56,10 @@ public class CarManager implements CarService {
         Car car = carRepository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new BusinessException("Car not found with id: " + id));
 
-        return carMapperService.mapToGetByIdCarResponse(car);
+        Rental activeRental = rentalRepository.findByCarIdAndStatus(car.getId(), RentalStatus.ACTIVE)
+                .orElse(null);
+
+        return carMapperService.toGetByIdResponse(car, activeRental);
     }
 
     @Override
@@ -61,7 +69,7 @@ public class CarManager implements CarService {
 
         carBusinessRules.checkIfCarCanBeUpdated(updateCarRequest, car);
 
-        carMapperService.mapToCar(updateCarRequest, car);
+        carMapperService.updateCar(updateCarRequest, car);
 
         carRepository.save(car);
     }

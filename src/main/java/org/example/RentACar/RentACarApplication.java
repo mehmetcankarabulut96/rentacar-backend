@@ -9,12 +9,6 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class RentACarApplication {
-
-	@Bean
-	public CarMapperManager getCarMapperManager(){
-		return new CarMapperManager();
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(RentACarApplication.class, args);
 	}
