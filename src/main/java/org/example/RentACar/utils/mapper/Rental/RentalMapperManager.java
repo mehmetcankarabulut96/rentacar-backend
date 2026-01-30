@@ -14,49 +14,84 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 public class RentalMapperManager implements RentalMapperService{
 
+    private int getCarId(Car car){
+
+        return (car == null)? 0: car.getId();
+    }
+
+    private int getCustomerId(Customer customer){
+        return (customer == null)? 0: customer.getId();
+    }
+
     @Override
-    public GetAllRentalResponse mapToGetAllRentalResponse(Rental rental) {
+    public GetAllRentalResponse toGetAllRentalResponse(Rental rental) {
+
+        if(rental == null) return null;
+
         GetAllRentalResponse response = new GetAllRentalResponse();
         response.setId(rental.getId());
         response.setStatus(rental.getStatus());
         response.setStartDateTime(rental.getStartDateTime());
         response.setEndDateTime(rental.getEndDateTime());
-        response.setCarId(rental.getCar().getId());
-        response.setCustomerId(rental.getCustomer().getId());
+        response.setCarId(getCarId(rental.getCar()));
+        response.setCustomerId(getCustomerId(rental.getCustomer()));
 
         return response;
     }
 
     @Override
-    public void mapToRental(UpdateRentalRequest request, Rental rental) {
+    public void updateRental(UpdateRentalRequest request, Rental rental) {
+
+        if(request == null || rental == null) return;
+
         rental.setStartDateTime(request.getStartDateTime());
         rental.setEndDateTime(request.getEndDateTime());
     }
 
-    @Override
-    public Rental mapToRental(CreateRentalRequest request) {
-        Rental rental = new Rental();
+    private Car toCar(Integer carId){
+
+        if(carId == null) return null;
 
         Car car = new Car();
-        car.setId(request.getCarId());
-        rental.setCar(car);
+        car.setId(carId);
+
+        return car;
+    }
+
+    private Customer toCustomer(Integer customerId){
+
+        if(customerId == null) return null;
 
         Customer customer = new Customer();
-        customer.setId(request.getCustomerId());
-        rental.setCustomer(customer);
+        customer.setId(customerId);
+
+        return customer;
+    }
+
+    @Override
+    public Rental toRental(CreateRentalRequest request) {
+
+        if(request == null) return null;
+
+        Rental rental = new Rental();
+        rental.setCar(toCar(request.getCarId()));
+        rental.setCustomer(toCustomer(request.getCustomerId()));
 
         return rental;
     }
 
     @Override
-    public GetByIdRentalResponse mapToGetByIdRentalResponse(Rental rental) {
+    public GetByIdRentalResponse toGetByIdRentalResponse(Rental rental) {
+
+        if(rental == null) return null;
+
         GetByIdRentalResponse response = new GetByIdRentalResponse();
         response.setId(rental.getId());
         response.setStatus(rental.getStatus());
         response.setStartDateTime(rental.getStartDateTime());
         response.setEndDateTime(rental.getEndDateTime());
-        response.setCarId(rental.getCar().getId());
-        response.setCustomerId(rental.getCustomer().getId());
+        response.setCarId(getCarId(rental.getCar()));
+        response.setCustomerId(getCustomerId(rental.getCustomer()));
 
         return response;
     }

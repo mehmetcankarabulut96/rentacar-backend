@@ -29,7 +29,7 @@ public class RentalManager implements RentalService {
 
         rentalBusinessRules.checkIfRentalCanBeCreated(request);
 
-        Rental rental = rentalMapperService.mapToRental(request);
+        Rental rental = rentalMapperService.toRental(request);
         rental.setStatus(RentalStatus.ACTIVE);
         rental.setStartDateTime(LocalDateTime.now());
         rental.setDeleted(false);
@@ -40,7 +40,7 @@ public class RentalManager implements RentalService {
     @Override
     public List<GetAllRentalResponse> getAll() {
         List<Rental> rentals = rentalRepository.findAllByDeletedFalse();
-        return rentals.stream().map(rentalMapperService::mapToGetAllRentalResponse).toList();
+        return rentals.stream().map(rentalMapperService::toGetAllRentalResponse).toList();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class RentalManager implements RentalService {
         Rental rental = rentalRepository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new BusinessException("Rental not found with id: " + id));
 
-        return rentalMapperService.mapToGetByIdRentalResponse(rental);
+        return rentalMapperService.toGetByIdRentalResponse(rental);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class RentalManager implements RentalService {
 
         rentalBusinessRules.checkIfRentalCanBeUpdated(request, rental);
 
-        rentalMapperService.mapToRental(request, rental);
+        rentalMapperService.updateRental(request, rental);
 
         rentalRepository.save(rental);
     }
