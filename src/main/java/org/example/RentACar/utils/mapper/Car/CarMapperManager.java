@@ -10,7 +10,6 @@ import org.example.RentACar.entities.concretes.Car;
 import org.example.RentACar.entities.concretes.Customer;
 import org.example.RentACar.entities.concretes.Model;
 import org.example.RentACar.entities.concretes.Rental;
-import org.example.RentACar.entities.enums.RentalStatus;
 import org.springframework.stereotype.Service;
 
 @Service

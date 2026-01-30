@@ -11,6 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,9 +23,12 @@ public class CarController {
     private CarService carService;
 
     @GetMapping
-    public Page<GetAllCarsResponse> getAll(
-            @PageableDefault(size=4, sort="modelYear", direction = Sort.Direction.DESC) Pageable pageable){
-        return this.carService.getAll(pageable);
+    public PagedModel<EntityModel<GetAllCarsResponse>> getAll(
+            @PageableDefault(size=4, sort="modelYear", direction = Sort.Direction.DESC) Pageable pageable,
+            PagedResourcesAssembler<GetAllCarsResponse> assembler){
+        Page<GetAllCarsResponse> carsPage = this.carService.getAll(pageable);
+
+        return assembler.toModel(carsPage);
     }
 
     @GetMapping("/{id}")
