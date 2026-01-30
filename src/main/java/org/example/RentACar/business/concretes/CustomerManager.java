@@ -8,7 +8,10 @@ import org.example.RentACar.business.responses.Customer.GetAllCustomerResponse;
 import org.example.RentACar.business.responses.Customer.GetByIdCustomerResponse;
 import org.example.RentACar.business.rules.CustomerBusinessRules;
 import org.example.RentACar.dataAccess.abstracts.CustomerRepository;
+import org.example.RentACar.dataAccess.abstracts.RentalRepository;
 import org.example.RentACar.entities.concretes.Customer;
+import org.example.RentACar.entities.concretes.Rental;
+import org.example.RentACar.entities.enums.RentalStatus;
 import org.example.RentACar.utils.exception.BusinessException;
 import org.example.RentACar.utils.mapper.Customer.CustomerMapperService;
 import org.springframework.stereotype.Service;
@@ -23,11 +26,13 @@ public class CustomerManager implements CustomerService {
     private CustomerBusinessRules customerBusinessRules;
     private CustomerMapperService customerMapperService;
 
+    private RentalRepository rentalRepository;
+
     @Override
     public void add(CreateCustomerRequest request) {
         customerBusinessRules.checkIfCustomerCanBeCreated(request);
 
-        Customer customer = customerMapperService.from(request);
+        Customer customer = customerMapperService.toCustomer(request);
         customer.setDeleted(false);
 
         customerRepository.save(customer);
@@ -47,8 +52,14 @@ public class CustomerManager implements CustomerService {
         Customer customer = customerRepository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new BusinessException("Customer not found with id: " + id));
 
-        GetByIdCustomerResponse response = customerMapperService.toGetByIdCustomerResponse(customer);
-        response.setRentalCount(customer.getRentals().size()); // lazy
+        List<Rental> activeRentals = rentalRepository.findAllByCustomerIdAndStatus(customer.getId(), RentalStatus.ACTIVE)
+                .orElse(null);
+
+        List<Rental> recentRentals = rentalRepository.findTop10ByCustomerIdAndStatusOrderByEndDateTimeDesc(id, RentalStatus.COMPLETED)
+                .orElse(null);
+
+        GetByIdCustomerResponse response = customerMapperService.toGetByIdCustomerResponse(customer, activeRentals, recentRentals);
+        response.setRentalCount(rentalRepository.countByCustomerId(id));
 
         return response;
     }
@@ -60,7 +71,7 @@ public class CustomerManager implements CustomerService {
 
         customerBusinessRules.checkIfCustomerCanBeUpdated(request, customer);
 
-        customerMapperService.mapToCustomer(request, customer);
+        customerMapperService.updateCustomer(request, customer);
 
         customerRepository.save(customer);
     }

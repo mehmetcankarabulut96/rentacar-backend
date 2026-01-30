@@ -13,6 +13,8 @@ public interface RentalRepository extends JpaRepository<Rental, Integer> {
 
     List<Rental> findAllByDeletedFalse();
     Optional<Rental> findByIdAndDeletedFalse(int id);
-
     Optional<Rental> findByCarIdAndStatus(int id, RentalStatus rentalStatus);
+    Optional<List<Rental>> findAllByCustomerIdAndStatus(int id, RentalStatus rentalStatus);
+    int countByCustomerId(int customerId);
+    Optional<List<Rental>> findTop10ByCustomerIdAndStatusOrderByEndDateTimeDesc(int customerId, RentalStatus rentalStatus);
 }
