@@ -16,8 +16,6 @@ import java.time.LocalDateTime;
 @Service
 @AllArgsConstructor
 public class RentalBusinessRules {
-    RentalRepository rentalRepository;
-
     CarService carService;
     CustomerService customerService;
 
