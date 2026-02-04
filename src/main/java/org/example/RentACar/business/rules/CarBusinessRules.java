@@ -21,8 +21,8 @@ public class CarBusinessRules {
     private RentalRepository rentalRepository;
     private ModelService modelService;
 
-    public void checkIfCarStateOkForRented(int id){
-        if(!carRepository.existsByIdAndState(id, CarState.AVAILABLE)){
+    public void checkIfCarStateOkForRented(int carId){
+        if(!carRepository.existsByIdAndState(carId, CarState.AVAILABLE)){
             throw new BusinessException("Car is not available for rent");
         }
     }
