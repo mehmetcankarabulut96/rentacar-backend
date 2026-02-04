@@ -183,6 +183,44 @@ public class ModelManagerTest {
 
         verify(modelBusinessRules).checkIfModelNameExistsForUpdate(1, "Benz");
         verifyNoInteractions(modelMapperService);
-        verifyNoInteractions(modelRepository);
+        verify(modelRepository, never()).save(currentModel);
+    }
+
+    @Test
+    void delete_whenBusinessRulesPass_shouldDelete(){
+
+        modelManager.delete(1);
+
+        verify(modelBusinessRules).checkIfModelExistsById(1);
+        verify(modelBusinessRules).checkIfModelCanBeDeleted(1);
+        verify(modelRepository).deleteById(1);
+    }
+
+    @Test
+    void delete_whenModelDoesNotExist_shouldThrowException(){
+
+        doThrow(new BusinessException("model not found"))
+                .when(modelBusinessRules)
+                .checkIfModelExistsById(1);
+
+        assertThrows(BusinessException.class, () -> modelManager.delete(1));
+
+        verify(modelBusinessRules).checkIfModelExistsById(1);
+        verify(modelBusinessRules, never()).checkIfModelCanBeDeleted(1);
+        verify(modelRepository, never()).deleteById(1);
+    }
+
+    @Test
+    void delete_whenModelCanNotBeDeleted_shouldThrowException(){
+
+        doThrow(new BusinessException("model can not be deleted"))
+                .when(modelBusinessRules)
+                .checkIfModelCanBeDeleted(1);
+
+        assertThrows(BusinessException.class, () -> modelManager.delete(1));
+
+        verify(modelBusinessRules).checkIfModelExistsById(1);
+        verify(modelBusinessRules).checkIfModelCanBeDeleted(1);
+        verify(modelRepository, never()).deleteById(1);
     }
 }
