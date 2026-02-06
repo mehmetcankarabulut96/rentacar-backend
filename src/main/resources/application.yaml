@@ -2,7 +2,7 @@ spring:
   application:
     name: RentACar
   datasource:
-    url: jdbc:postgresql://localhost:5432/car-rental
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/car-rental
     username: your_username
     password: your_password
   jpa:
