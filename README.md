@@ -16,13 +16,13 @@ Car rental backend system using Spring Boot with traditional N-Layered Architect
 - DTO-based communication
 
 ## Current Status
-- All CRUD operations completed
+- Completed Services
 - Completed unit tests;
   - ModelManager ( 73% lines covered )
   - CarBusinessRules ( 100% lines covered )
+- Working on containerization
 
 ## Future Improvements
-- Swagger / OpenAPI documentation
 - Docker support
 - CI/CD pipeline
 
