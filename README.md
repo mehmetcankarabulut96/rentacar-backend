@@ -13,6 +13,7 @@ Car rental backend system using Spring Boot with traditional N-Layered Architect
 - Request–Response pattern
 - Global exception handling
 - Custom mapper implementation
+- Docker support
 
 ## Current Status
 - Completed Services
