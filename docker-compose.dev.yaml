@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-db-compose
+    env_file:
+      - .env.dev
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - rentacar-network-compose
+
+  app:
+    build: .
+    image: spring-app:dev
+    container_name: java-app-compose
+    ports:
+      - "8080:7777"
+    env_file:
+      - .env.dev
+    networks:
+      - rentacar-network-compose
+    depends_on:
+      - postgres
+
+networks:
+  rentacar-network-compose:
+    driver: bridge
+
+volumes:
+  postgres-data:

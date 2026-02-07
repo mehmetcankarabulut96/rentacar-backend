@@ -1,0 +1,6 @@
+name: Dev CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - dev
