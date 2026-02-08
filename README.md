@@ -74,7 +74,7 @@ PostgreSQL must be started before the application container.
 The -v option is optional.
 If a volume name is provided, database data will persist even if the container is removed.
 ```bash
-docker run -d --name db_container_name --network network_name --env-file .env.dev -v volume_name:/var/lib/postgresql/data postgres:15
+docker run -d --name db_container_name --network network_name --env-file .env -v volume_name:/var/lib/postgresql/data postgres:15
 ```
 
 ### 6. Start the application container
